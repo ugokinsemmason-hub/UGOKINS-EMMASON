@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETS – UGOKINS EMMASON | Invoice Builder</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',sans-serif;background:#eef2f7;color:#1a2b4a;}
+.topbar{background:linear-gradient(135deg,#1a3a6b,#2563eb);color:#fff;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(37,99,235,.35);}
+.topbar-left{display:flex;align-items:center;gap:16px;}
+.topbar-logo{height:54px;width:54px;object-fit:contain;border-radius:8px;border:2px solid rgba(255,255,255,.3);}
+.topbar-logo-placeholder{height:54px;width:54px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;border:2px solid rgba(255,255,255,.3);}
+.topbar h1{font-size:1.35rem;letter-spacing:.5px;font-weight:800;}
+.topbar p{font-size:.78rem;opacity:.8;margin-top:2px;}
+.topbar-right{text-align:right;font-size:.8rem;opacity:.85;line-height:1.7;}
+.container{max-width:1150px;margin:28px auto;padding:0 20px;}
+.inv-banner{background:linear-gradient(135deg,#1a3a6b,#2563eb);color:#fff;border-radius:14px;padding:16px 26px;display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;box-shadow:0 4px 18px rgba(37,99,235,.25);}
+.inv-banner .label{font-size:.72rem;opacity:.75;text-transform:uppercase;letter-spacing:1px;}
+.inv-banner .value{font-size:1.15rem;font-weight:800;margin-top:2px;}
+.card{background:#fff;border-radius:16px;padding:28px 30px;margin-bottom:22px;box-shadow:0 2px 18px rgba(0,0,0,.07);border-top:4px solid #2563eb;}
+.card.green{border-top-color:#16a34a;}
+.card h2{font-size:.82rem;font-weight:800;color:#2563eb;text-transform:uppercase;letter-spacing:1px;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.card h2::before{content:'';display:inline-block;width:4px;height:16px;background:#2563eb;border-radius:2px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;}
+label{display:block;font-size:.75rem;font-weight:700;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px;}
+input,textarea,select{width:100%;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.92rem;color:#1a2b4a;background:#fafbfc;transition:border .2s;}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#2563eb;background:#fff;}
+textarea{resize:vertical;min-height:65px;}
+.locked-field{background:#f1f5f9;border:1.5px dashed #cbd5e1;border-radius:8px;padding:10px 13px;font-size:.92rem;color:#475569;display:flex;align-items:center;gap:8px;}
+.logo-section{display:flex;align-items:center;gap:14px;padding:14px;background:#f8faff;border-radius:10px;border:1.5px dashed #bfdbfe;}
+.logo-display{width:80px;height:70px;object-fit:contain;border-radius:8px;border:1px solid #e2e8f0;background:#fff;}
+.logo-placeholder-box{width:80px;height:70px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.logo-locked-note{font-size:.78rem;color:#64748b;margin-top:4px;}
+.logo-locked-note strong{color:#dc2626;}
+.table-wrap{overflow-x:auto;}
+table.pt{width:100%;border-collapse:collapse;font-size:.83rem;}
+table.pt th{background:#1a3a6b;color:#fff;padding:11px 9px;text-align:left;font-weight:700;white-space:nowrap;}
+table.pt td{padding:8px;border-bottom:1px solid #e2e8f0;vertical-align:top;}
+table.pt tr:hover td{background:#f8faff;}
+table.pt input,table.pt select{padding:7px 8px;font-size:.82rem;}
+table.pt textarea{min-height:52px;font-size:.82rem;}
+
+/* Multi-image cell */
+.img-cell{display:flex;flex-direction:column;gap:6px;min-width:110px;}
+.img-thumbs{display:flex;flex-wrap:wrap;gap:5px;}
+.img-thumb{width:50px;height:50px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;cursor:pointer;transition:transform .15s;}
+.img-thumb:hover{transform:scale(1.08);border-color:#2563eb;}
+.img-add-btn{display:flex;align-items:center;justify-content:center;gap:4px;background:#eff6ff;border:1.5px dashed #2563eb;border-radius:7px;padding:5px 8px;font-size:.75rem;font-weight:700;color:#2563eb;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.img-add-btn:hover{background:#dbeafe;}
+.img-count{font-size:.7rem;color:#94a3b8;text-align:center;}
+
+.btn{padding:10px 20px;border:none;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;}
+.btn-primary{background:#2563eb;color:#fff;}
+.btn-primary:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,99,235,.35);}
+.btn-danger{background:#fee2e2;color:#dc2626;}
+.btn-danger:hover{background:#fecaca;}
+.btn-success{background:#16a34a;color:#fff;}
+.btn-success:hover{background:#15803d;transform:translateY(-1px);}
+.btn-outline{background:#fff;color:#2563eb;border:2px solid #2563eb;}
+.btn-outline:hover{background:#eff6ff;}
+.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:10px;}
+.total-row td{background:#1a3a6b!important;color:#fff;font-weight:800;font-size:1rem;}
+.ack-box{background:#f8faff;border:1.5px solid #bfdbfe;border-left:4px solid #2563eb;border-radius:0 10px 10px 0;padding:16px 20px;font-size:.9rem;color:#334155;line-height:1.8;}
+.ack-box input{display:inline;width:210px;border:none;border-bottom:2px solid #2563eb;background:transparent;padding:1px 5px;font-size:.92rem;font-weight:700;color:#1a3a6b;}
+.ack-box input:focus{outline:none;}
+
+/* Overlay */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;overflow-y:auto;padding:30px 20px;}
+.preview-box{background:#fff;max-width:980px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45);}
+.preview-hdr{background:linear-gradient(135deg,#1a3a6b,#2563eb);color:#fff;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;}
+.preview-body{padding:30px;position:relative;}
+.watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;overflow:hidden;}
+.watermark img{width:400px;height:400px;object-fit:contain;opacity:.055;transform:rotate(-20deg);}
+.watermark-text{font-size:4.5rem;font-weight:900;color:#2563eb;opacity:.05;transform:rotate(-20deg);white-space:nowrap;user-select:none;}
+.preview-inner{position:relative;z-index:1;}
+.prev-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.prev-company h3{font-size:1.2rem;font-weight:900;color:#1a3a6b;}
+.prev-company p{font-size:.8rem;color:#64748b;line-height:1.7;}
+.prev-inv-box .inv-num{background:#1a3a6b;color:#fff;padding:6px 14px;border-radius:20px;font-size:.85rem;font-weight:700;display:inline-block;}
+.prev-inv-box p{font-size:.8rem;color:#64748b;margin-top:5px;line-height:1.6;text-align:right;}
+.to-from{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;padding:16px;background:#f8faff;border-radius:10px;border:1px solid #e2e8f0;}
+.to-label{font-size:.7rem;font-weight:800;color:#2563eb;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.to-from h4{font-size:.95rem;font-weight:700;color:#1a2b4a;}
+.to-from p{font-size:.8rem;color:#64748b;line-height:1.65;}
+.prev-table{width:100%;border-collapse:collapse;font-size:.8rem;margin:18px 0;}
+.prev-table th{background:#1a3a6b;color:#fff;padding:9px 10px;text-align:left;font-weight:700;}
+.prev-table td{padding:8px 10px;border-bottom:1px solid #e2e8f0;vertical-align:top;}
+.prev-table tr:nth-child(even) td{background:#f8faff;}
+.prev-table .sub-row td{background:#1a3a6b;color:#fff;font-weight:800;font-size:.95rem;}
+
+/* Preview multi-image grid */
+.prev-imgs{display:flex;flex-wrap:wrap;gap:5px;}
+.prev-imgs img{width:58px;height:58px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;}
+
+.prev-ack{margin-top:18px;padding:14px 18px;background:#eff6ff;border-left:4px solid #2563eb;border-radius:0 8px 8px 0;font-size:.85rem;color:#334155;line-height:1.7;}
+.prev-ack strong{color:#1a3a6b;}
+.prev-notes{margin-top:12px;padding:12px 16px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;font-size:.82rem;color:#78350f;}
+.preview-footer{padding:18px 28px;background:#f8faff;display:flex;gap:12px;flex-wrap:wrap;border-top:1px solid #e2e8f0;}
+
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;}
+.lightbox.show{display:flex;}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 10px 60px rgba(0,0,0,.6);}
+.lightbox-close{position:absolute;top:20px;right:28px;color:#fff;font-size:2rem;cursor:pointer;font-weight:700;}
+
+@media(max-width:700px){.grid2,.grid3,.to-from{grid-template-columns:1fr;}.prev-top{flex-direction:column;gap:14px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo-placeholder" id="topbarLogoWrap">⚙️</div>
+    <div>
+      <h1 id="topbarName">ETS – UGOKINS EMMASON</h1>
+      <p>Professional Engineering Invoice Builder</p>
+    </div>
+  </div>
+  <div class="topbar-right">
+    📞 +243 990 389 493 / +243 994 999 666<br>
+    ✉️ ugokinginv@yahoo.com<br>
+    📍 No.105, Av. Isoki, Q/Ngwaka, C/Kinshasa
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="inv-banner">
+    <div><div class="label">Proforma Invoice No.</div><div class="value" id="invNoDisplay">—</div></div>
+    <div style="text-align:right;"><div class="label">Date Issued</div><div class="value" id="invDateDisplay">—</div></div>
+  </div>
+
+  <!-- Company -->
+  <div class="card">
+    <h2>Our Company Details</h2>
+    <div class="grid2">
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label>Company Name <span style="color:#dc2626;font-size:.7rem;">🔒 LOCKED</span></label>
+          <div class="locked-field">🔒 <span id="lockedNameDisplay">ETS – UGOKINS EMMASON</span></div>
+        </div>
+        <div class="grid2">
+          <div><label>Phone</label><input type="text" id="companyPhone" value="+243 990 389 493 / +243 994 999 666"></div>
+          <div><label>Email</label><input type="email" id="companyEmail" value="ugokinginv@yahoo.com"></div>
+        </div>
+        <div class="grid2">
+          <div><label>Address</label><input type="text" id="companyAddress" value="No.105, Av. Isoki, Q/Ngwaka, C/Kinshasa, P/Kinshasa"></div>
+          <div><label>Quote Valid Until</label><input type="date" id="quoteValid"></div>
+        </div>
+      </div>
+      <div>
+        <label>Company Logo <span style="color:#dc2626;font-size:.7rem;">🔒 LOCKED</span></label>
+        <div class="logo-section">
+          <div id="logoDisplayWrap">
+            <div class="logo-placeholder-box" id="logoPlaceholder">⚙️</div>
+            <img id="logoImg" class="logo-display" src="" alt="Logo" style="display:none;">
+          </div>
+          <div>
+            <div style="font-weight:700;color:#1a3a6b;font-size:.95rem;" id="logoNameLabel">ETS – UGOKINS EMMASON</div>
+            <p class="logo-locked-note">Logo is <strong>locked</strong>.<br>Only editable from VS Code.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client -->
+  <div class="card">
+    <h2>Client / Recipient Details (TO)</h2>
+    <div class="grid3">
+      <div><label>Client / Company Name</label><input type="text" id="clientName" placeholder="e.g. M.Mak Door Laboratory"></div>
+      <div><label>Phone Number</label><input type="text" id="clientPhone" placeholder="e.g. +243 848 424 943"></div>
+      <div><label>Email Address</label><input type="email" id="clientEmail" placeholder="client@email.com"></div>
+    </div>
+    <div style="margin-top:14px;"><label>Client Address</label><input type="text" id="clientAddress" placeholder="Full address of recipient"></div>
+  </div>
+
+  <!-- Products -->
+  <div class="card">
+    <h2>Products / Items</h2>
+    <div class="table-wrap">
+      <table class="pt" id="productTable">
+        <thead>
+          <tr>
+            <th style="width:34px;">#</th>
+            <th style="width:130px;">Images <span style="font-weight:400;opacity:.7;font-size:.75rem;">(multiple)</span></th>
+            <th>Product Name / Description</th>
+            <th style="width:105px;">Size / Code</th>
+            <th style="width:68px;">Unit</th>
+            <th style="width:58px;">Qty</th>
+            <th style="width:96px;">Unit Price ($)</th>
+            <th style="width:96px;">Total ($)</th>
+            <th style="width:40px;"></th>
+          </tr>
+        </thead>
+        <tbody id="productBody"></tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td colspan="7" style="text-align:right;padding:12px 10px;letter-spacing:.5px;">GRAND TOTAL</td>
+            <td id="grandTotal" style="padding:12px 10px;font-size:1.05rem;">$0.00</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="actions" style="margin-top:14px;">
+      <button class="btn btn-outline" onclick="addRow()">➕ Add Product Row</button>
+    </div>
+  </div>
+
+  <!-- Acknowledgement -->
+  <div class="card">
+    <h2>Engineer Acknowledgement & Notes</h2>
+    <div class="ack-box">
+      I, <input type="text" id="engineerName" placeholder="Engineer's full name">,
+      hereby acknowledge that all the information contained in this proforma invoice is correct, complete,
+      and has been duly verified. This quotation represents the actual products, specifications,
+      quantities, and prices as agreed upon with the client.
+    </div>
+    <div style="margin-top:16px;">
+      <label>Additional Notes (optional)</label>
+      <textarea id="invoiceNotes" placeholder="e.g. Payment terms, delivery timeline, warranty conditions..."></textarea>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="card green">
+    <div class="actions">
+      <button class="btn btn-primary" onclick="showPreview()">👁️ Preview Invoice</button>
+      <button class="btn btn-success" onclick="exportPDF()">📄 Download PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Preview Overlay -->
+<div class="overlay" id="previewOverlay">
+  <div class="preview-box">
+    <div class="preview-hdr">
+      <div><div style="font-size:1.05rem;font-weight:800;">📋 Invoice Preview</div><div style="font-size:.78rem;opacity:.75;margin-top:2px;">Review all details before downloading</div></div>
+      <button class="btn" style="background:rgba(255,255,255,.18);color:#fff;" onclick="closePreview()">✕ Close & Edit</button>
+    </div>
+    <div class="preview-body">
+      <div class="watermark" id="previewWatermark"></div>
+      <div class="preview-inner" id="previewInner"></div>
+    </div>
+    <div class="preview-footer">
+      <button class="btn btn-success" onclick="exportPDF()">📄 Download PDF</button>
+      <button class="btn btn-outline" onclick="closePreview()">✏️ Go Back & Edit</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+/* ╔═══════════════════════════════════════════╗
+   ║  LOCKED — EDIT ONLY FROM VS CODE          ║
+   ╚═══════════════════════════════════════════╝ */
+const COMPANY_NAME = "ETS – UGOKINS EMMASON";
+const COMPANY_LOGO_SRC = "logo 2.png"; // ← paste base64 or relative path e.g. "logo.png"
+
+/* Apply locked values */
+['lockedNameDisplay','logoNameLabel','topbarName'].forEach(id=>document.getElementById(id).textContent=COMPANY_NAME);
+document.title = COMPANY_NAME+' | Invoice Builder';
+if(COMPANY_LOGO_SRC){
+  const li=document.getElementById('logoImg'); li.src=COMPANY_LOGO_SRC; li.style.display='block';
+  document.getElementById('logoPlaceholder').style.display='none';
+  document.getElementById('topbarLogoWrap').innerHTML=`<img src="${COMPANY_LOGO_SRC}" class="topbar-logo">`;
+}
+
+/* Invoice number & date */
+function genInvNo(){const n=new Date();return `INV-${String(n.getFullYear()).slice(2)}${String(n.getMonth()+1).padStart(2,'0')}${String(n.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*900)+100}`;}
+const INVOICE_NO=genInvNo();
+const TODAY=new Date();
+const TODAY_STR=TODAY.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+document.getElementById('invNoDisplay').textContent=INVOICE_NO;
+document.getElementById('invDateDisplay').textContent=TODAY_STR;
+const qv=new Date(); qv.setDate(qv.getDate()+30);
+document.getElementById('quoteValid').value=qv.toISOString().split('T')[0];
+
+/* Resize image to 200x200 */
+function resizeImage(file,cb){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement('canvas');
+      canvas.width=200; canvas.height=200;
+      const ctx=canvas.getContext('2d');
+      const scale=Math.max(200/img.width,200/img.height);
+      const w=img.width*scale,h=img.height*scale;
+      ctx.fillStyle='#fff'; ctx.fillRect(0,0,200,200);
+      ctx.drawImage(img,(200-w)/2,(200-h)/2,w,h);
+      cb(canvas.toDataURL('image/jpeg',0.85));
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* Image store: rowId → array of base64 strings */
+const imgStore={};
+let rowCount=0;
+
+function addRow(){
+  rowCount++;
+  const id=rowCount;
+  imgStore[id]=[];
+  const tr=document.createElement('tr');
+  tr.id=`row-${id}`;
+  tr.innerHTML=`
+    <td style="font-weight:800;color:#2563eb;text-align:center;vertical-align:middle;">${id}</td>
+    <td>
+      <div class="img-cell" id="imgCell-${id}">
+        <div class="img-thumbs" id="imgThumbs-${id}"></div>
+        <div class="img-add-btn" onclick="document.getElementById('imgFile-${id}').click()">📷 Add Image</div>
+        <div class="img-count" id="imgCount-${id}">0 image(s)</div>
+      </div>
+      <input type="file" id="imgFile-${id}" accept="image/*" multiple style="display:none" onchange="loadImgs(${id},this)">
+    </td>
+    <td><textarea id="desc-${id}" placeholder="Product name & description..."></textarea></td>
+    <td><input type="text" id="size-${id}" placeholder="e.g. 1000×2100"></td>
+    <td>
+      <select id="unit-${id}">
+        <option>SET</option><option>PCS</option><option>M²</option><option>M</option><option>LOT</option><option>KG</option>
+      </select>
+    </td>
+    <td style="vertical-align:middle;"><input type="number" id="qty-${id}" value="1" min="1" oninput="calcRow(${id})" style="width:52px;"></td>
+    <td style="vertical-align:middle;"><input type="number" id="price-${id}" value="0" min="0" step="0.01" oninput="calcRow(${id})" style="width:84px;"></td>
+    <td id="total-${id}" style="font-weight:800;color:#1a3a6b;vertical-align:middle;">$0.00</td>
+    <td style="vertical-align:middle;"><button class="btn btn-danger" onclick="removeRow(${id})" style="padding:6px 10px;" title="Remove">🗑</button></td>
+  `;
+  document.getElementById('productBody').appendChild(tr);
+  calcSubtotal();
+}
+
+function loadImgs(id,input){
+  if(!input.files||!input.files.length) return;
+  Array.from(input.files).forEach(file=>{
+    resizeImage(file,b64=>{
+      imgStore[id].push(b64);
+      renderThumbs(id);
+    });
+  });
+  input.value=''; // allow re-uploading same file
+}
+
+function renderThumbs(id){
+  const wrap=document.getElementById(`imgThumbs-${id}`);
+  const count=document.getElementById(`imgCount-${id}`);
+  wrap.innerHTML=imgStore[id].map((b64,i)=>
+    `<img src="${b64}" class="img-thumb" title="Click to view | Right-click to remove"
+      onclick="openLightbox('${b64}')"
+      oncontextmenu="removeImg(event,${id},${i})">`
+  ).join('');
+  count.textContent=`${imgStore[id].length} image(s) — right-click thumb to remove`;
+}
+
+function removeImg(e,rowId,imgIdx){
+  e.preventDefault();
+  imgStore[rowId].splice(imgIdx,1);
+  renderThumbs(rowId);
+}
+
+function calcRow(id){
+  const qty=parseFloat(document.getElementById(`qty-${id}`)?.value)||0;
+  const price=parseFloat(document.getElementById(`price-${id}`)?.value)||0;
+  document.getElementById(`total-${id}`).textContent='$'+(qty*price).toLocaleString('en-US',{minimumFractionDigits:2});
+  calcSubtotal();
+}
+
+function removeRow(id){
+  document.getElementById(`row-${id}`)?.remove();
+  delete imgStore[id];
+  calcSubtotal();
+}
+
+function calcSubtotal(){
+  let t=0;
+  document.querySelectorAll('#productBody tr').forEach(tr=>{
+    const id=tr.id.replace('row-','');
+    t+=(parseFloat(document.getElementById(`qty-${id}`)?.value)||0)*(parseFloat(document.getElementById(`price-${id}`)?.value)||0);
+  });
+  document.getElementById('grandTotal').textContent='$'+t.toLocaleString('en-US',{minimumFractionDigits:2});
+  return t;
+}
+
+addRow();
+
+/* Lightbox */
+function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('show');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('show');}
+
+/* Gather data */
+function gatherData(){
+  const rows=[];
+  document.querySelectorAll('#productBody tr').forEach((tr,i)=>{
+    const id=tr.id.replace('row-','');
+    const qty=parseFloat(document.getElementById(`qty-${id}`)?.value)||0;
+    const price=parseFloat(document.getElementById(`price-${id}`)?.value)||0;
+    rows.push({
+      no:i+1,
+      desc:document.getElementById(`desc-${id}`)?.value||'',
+      size:document.getElementById(`size-${id}`)?.value||'',
+      unit:document.getElementById(`unit-${id}`)?.value||'SET',
+      qty,price,total:qty*price,
+      imgs:imgStore[id]||[]
+    });
+  });
+  return {
+    invoiceNo:INVOICE_NO, date:TODAY_STR,
+    quoteValid:document.getElementById('quoteValid').value,
+    company:{name:COMPANY_NAME,logo:COMPANY_LOGO_SRC,
+      phone:document.getElementById('companyPhone').value,
+      email:document.getElementById('companyEmail').value,
+      address:document.getElementById('companyAddress').value},
+    client:{name:document.getElementById('clientName').value,
+      phone:document.getElementById('clientPhone').value,
+      email:document.getElementById('clientEmail').value,
+      address:document.getElementById('clientAddress').value},
+    engineer:document.getElementById('engineerName').value,
+    notes:document.getElementById('invoiceNotes').value,
+    rows, subtotal:calcSubtotal()
+  };
+}
+
+/* Preview */
+function showPreview(){
+  const d=gatherData();
+  const wm=document.getElementById('previewWatermark');
+  wm.innerHTML=d.company.logo?`<img src="${d.company.logo}">`:`<div class="watermark-text">${d.company.name}</div>`;
+
+  const logoHTML=d.company.logo
+    ?`<img src="${d.company.logo}" style="height:65px;max-width:150px;object-fit:contain;border-radius:8px;">`
+    :`<div style="width:60px;height:55px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">⚙️</div>`;
+
+  const rowsHTML=d.rows.map(r=>{
+    const imgsHTML=r.imgs.length
+      ?`<div class="prev-imgs">${r.imgs.map(b=>`<img src="${b}" onclick="openLightbox('${b}')" style="cursor:pointer;" title="Click to enlarge">`).join('')}</div>`
+      :`<span style="color:#cbd5e1;font-size:1.1rem;">📷</span>`;
+    return `<tr>
+      <td style="text-align:center;font-weight:800;color:#2563eb;">${r.no}</td>
+      <td>${imgsHTML}</td>
+      <td>${r.desc.replace(/\n/g,'<br>')}</td>
+      <td>${r.size}</td>
+      <td style="text-align:center;">${r.unit}</td>
+      <td style="text-align:center;">${r.qty}</td>
+      <td style="text-align:right;">$${r.price.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+      <td style="font-weight:800;text-align:right;">$${r.total.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('previewInner').innerHTML=`
+    <div class="prev-top">
+      <div class="prev-company" style="display:flex;align-items:flex-start;gap:14px;">
+        ${logoHTML}
+        <div><h3>${d.company.name}</h3>
+        <p>📞 ${d.company.phone}<br>✉️ ${d.company.email}<br>📍 ${d.company.address}</p></div>
+      </div>
+      <div class="prev-inv-box">
+        <div class="inv-num">${d.invoiceNo}</div>
+        <p>Date: <strong>${d.date}</strong><br>Quote Valid: <strong>${d.quoteValid}</strong></p>
+      </div>
+    </div>
+    <div style="background:#1a3a6b;color:#fff;text-align:center;padding:9px;border-radius:8px;font-weight:800;letter-spacing:1px;font-size:.95rem;margin-bottom:18px;">PROFORMA INVOICE</div>
+    <div class="to-from">
+      <div>
+        <div class="to-label">TO (Client / Recipient)</div>
+        <h4>${d.client.name||'—'}</h4>
+        <p>📞 ${d.client.phone||'—'}<br>✉️ ${d.client.email||'—'}<br>📍 ${d.client.address||'—'}</p>
+      </div>
+      <div>
+        <div class="to-label">FROM (Supplier)</div>
+        <h4>${d.company.name}</h4>
+        <p>📞 ${d.company.phone}<br>✉️ ${d.company.email}<br>📍 ${d.company.address}</p>
+      </div>
+    </div>
+    <table class="prev-table">
+      <thead><tr><th>#</th><th>Images</th><th>Product Description</th><th>Size/Code</th><th>Unit</th><th>Qty</th><th>Unit Price</th><th>Sub Total</th></tr></thead>
+      <tbody>${rowsHTML}</tbody>
+      <tfoot><tr class="sub-row">
+        <td colspan="7" style="text-align:right;padding:11px 10px;letter-spacing:.5px;">GRAND TOTAL</td>
+        <td style="padding:11px 10px;font-size:1rem;text-align:right;">$${d.subtotal.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+      </tr></tfoot>
+    </table>
+    ${d.notes?`<div class="prev-notes"><strong>📝 Notes:</strong> ${d.notes}</div>`:''}
+    <div class="prev-ack">I, <strong>${d.engineer||'_______________'}</strong>, hereby acknowledge that all the information contained in this proforma invoice is correct, complete, and has been duly verified. This quotation represents the actual products, specifications, quantities, and prices as agreed upon with the client.</div>
+  `;
+  document.getElementById('previewOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closePreview(){
+  document.getElementById('previewOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+/* PDF Export */
+async function exportPDF(){
+  const d=gatherData();
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const pw=doc.internal.pageSize.getWidth();
+  const ph=doc.internal.pageSize.getHeight();
+
+  /* Watermark */
+  if(d.company.logo){
+    try{doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:.06}));doc.addImage(d.company.logo,'JPEG',pw/2-45,ph/2-45,90,90);doc.restoreGraphicsState();}catch(e){}
+  } else {
+    doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:.05}));
+    doc.setTextColor(37,99,235);doc.setFontSize(32);doc.setFont('helvetica','bold');
+    doc.text(d.company.name,pw/2,ph/2,{align:'center',angle:20});doc.restoreGraphicsState();
+  }
+
+  /* Header */
+  doc.setFillColor(26,58,107); doc.rect(0,0,pw,40,'F');
+  const txtX=d.company.logo?44:14;
+  if(d.company.logo){try{doc.addImage(d.company.logo,'JPEG',12,5,26,26);}catch(e){}}
+  doc.setTextColor(255,255,255);doc.setFontSize(14);doc.setFont('helvetica','bold');
+  doc.text(d.company.name,txtX,13);
+  doc.setFontSize(7.5);doc.setFont('helvetica','normal');
+  doc.text(`Tel: ${d.company.phone}`,txtX,19);
+  doc.text(`Email: ${d.company.email}`,txtX,24);
+  doc.text(`Address: ${d.company.address}`,txtX,29);
+  doc.setFontSize(8);doc.setFont('helvetica','bold');
+  doc.text(d.invoiceNo,pw-12,12,{align:'right'});
+  doc.setFont('helvetica','normal');doc.setFontSize(7.5);
+  doc.text(`Date: ${d.date}`,pw-12,18,{align:'right'});
+  doc.text(`Quote Valid: ${d.quoteValid}`,pw-12,23,{align:'right'});
+
+  /* Title bar */
+  doc.setFillColor(37,99,235);doc.rect(0,40,pw,9,'F');
+  doc.setTextColor(255,255,255);doc.setFontSize(10);doc.setFont('helvetica','bold');
+  doc.text('PROFORMA INVOICE',pw/2,46.5,{align:'center'});
+
+  let y=56;
+
+  /* TO/FROM */
+  doc.setFillColor(248,250,255);doc.roundedRect(12,y,pw-24,28,3,3,'F');
+  doc.setDrawColor(226,232,240);doc.roundedRect(12,y,pw-24,28,3,3,'S');
+  doc.setFontSize(7);doc.setFont('helvetica','bold');doc.setTextColor(37,99,235);
+  doc.text('TO (CLIENT / RECIPIENT)',16,y+5);doc.text('FROM (SUPPLIER)',pw/2+2,y+5);
+  doc.setFont('helvetica','bold');doc.setTextColor(26,58,107);doc.setFontSize(8.5);
+  doc.text(d.client.name||'—',16,y+11);doc.text(d.company.name,pw/2+2,y+11);
+  doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);doc.setFontSize(7.5);
+  doc.text(`Tel: ${d.client.phone||'—'}`,16,y+16);
+  doc.text(`Email: ${d.client.email||'—'}`,16,y+21);
+  doc.text(`Address: ${d.client.address||'—'}`,16,y+26,{maxWidth:pw/2-20});
+  doc.text(`Tel: ${d.company.phone}`,pw/2+2,y+16);
+  doc.text(`Email: ${d.company.email}`,pw/2+2,y+21);
+  doc.text(`Address: ${d.company.address}`,pw/2+2,y+26,{maxWidth:pw/2-16});
+  y+=34;
+
+  /* Products table with multiple images per row */
+  const IMG_CELL_SIZE=18; // mm each image in PDF
+  const IMG_GAP=2;
+
+  const tableBody=d.rows.map(r=>[
+    r.no,
+    '', // images drawn via didDrawCell
+    r.desc,
+    r.size,
+    r.unit,
+    r.qty,
+    '$'+r.price.toLocaleString('en-US',{minimumFractionDigits:2}),
+    '$'+r.total.toLocaleString('en-US',{minimumFractionDigits:2})
+  ]);
+  tableBody.push(['','','','','','','GRAND TOTAL','$'+d.subtotal.toLocaleString('en-US',{minimumFractionDigits:2})]);
+
+  // Calculate row heights based on image count
+  const rowHeights=d.rows.map(r=>{
+    const n=r.imgs.length||0;
+    if(n===0) return 18;
+    const cols=Math.min(n,3);
+    const rowsNeeded=Math.ceil(n/cols);
+    return Math.max(18, rowsNeeded*(IMG_CELL_SIZE+IMG_GAP)+4);
+  });
+
+  doc.autoTable({
+    startY:y,
+    head:[['#','Images','Product Description','Size/Code','Unit','Qty','Unit Price','Sub Total']],
+    body:tableBody,
+    theme:'grid',
+    headStyles:{fillColor:[26,58,107],textColor:255,fontStyle:'bold',fontSize:8,cellPadding:3},
+    bodyStyles:{fontSize:7.5,textColor:[30,30,30],cellPadding:2},
+    alternateRowStyles:{fillColor:[248,250,255]},
+    columnStyles:{
+      0:{cellWidth:8,halign:'center'},
+      1:{cellWidth:38},
+      2:{cellWidth:52},
+      3:{cellWidth:20},
+      4:{cellWidth:12,halign:'center'},
+      5:{cellWidth:10,halign:'center'},
+      6:{cellWidth:22,halign:'right'},
+      7:{cellWidth:22,halign:'right'}
+    },
+    didParseCell:(data)=>{
+      if(data.section==='body'){
+        if(data.row.index<d.rows.length){
+          data.cell.styles.minCellHeight=rowHeights[data.row.index];
+        }
+        if(data.row.index===tableBody.length-1){
+          data.cell.styles.fillColor=[26,58,107];
+          data.cell.styles.textColor=[255,255,255];
+          data.cell.styles.fontStyle='bold';
+          data.cell.styles.fontSize=9;
+        }
+      }
+    },
+    didDrawCell:(data)=>{
+      if(data.section==='body' && data.column.index===1 && data.row.index<d.rows.length){
+        const imgs=d.rows[data.row.index].imgs;
+        if(!imgs||!imgs.length) return;
+        const cx=data.cell.x+2;
+        const cy=data.cell.y+2;
+        const maxCols=3;
+        imgs.forEach((b64,i)=>{
+          try{
+            const col=i%maxCols;
+            const row=Math.floor(i/maxCols);
+            const x=cx+col*(IMG_CELL_SIZE+IMG_GAP);
+            const yy=cy+row*(IMG_CELL_SIZE+IMG_GAP);
+            doc.addImage(b64,'JPEG',x,yy,IMG_CELL_SIZE,IMG_CELL_SIZE);
+          }catch(e){}
+        });
+      }
+    }
+  });
+
+  y=doc.lastAutoTable.finalY+8;
+
+  /* Notes */
+  if(d.notes){
+    if(y+16>ph-20){doc.addPage();y=15;}
+    doc.setFillColor(255,251,235);doc.roundedRect(12,y,pw-24,14,2,2,'F');
+    doc.setDrawColor(252,211,77);doc.roundedRect(12,y,pw-24,14,2,2,'S');
+    doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.setTextColor(120,53,15);
+    doc.text('Notes:',15,y+5);doc.setFont('helvetica','normal');
+    doc.text(d.notes,28,y+5,{maxWidth:pw-44});
+    y+=18;
+  }
+
+  /* Acknowledgement */
+  if(y+24>ph-15){doc.addPage();y=15;}
+  doc.setFillColor(239,246,255);doc.roundedRect(12,y,pw-24,22,2,2,'F');
+  doc.setFillColor(37,99,235);doc.rect(12,y,3,22,'F');
+  doc.setFontSize(7.5);doc.setFont('helvetica','normal');doc.setTextColor(51,65,85);
+  const ack=`I, ${d.engineer||'_______________'}, hereby acknowledge that all the information contained in this proforma invoice is correct, complete, and has been duly verified. This quotation represents the actual products, specifications, quantities, and prices as agreed upon with the client.`;
+  doc.text(ack,18,y+7,{maxWidth:pw-34});
+
+  /* Footer */
+  doc.setFontSize(7);doc.setTextColor(148,163,184);doc.setFont('helvetica','italic');
+  doc.text(`${d.company.name} | ${d.invoiceNo} | Generated ${d.date}`,pw/2,ph-8,{align:'center'});
+
+  doc.save(`${d.invoiceNo}.pdf`);
+}
+</script>
+</body>
+</html>
