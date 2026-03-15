@@ -43,8 +43,6 @@ table.pt td{padding:8px;border-bottom:1px solid #e2e8f0;vertical-align:top;}
 table.pt tr:hover td{background:#f8faff;}
 table.pt input,table.pt select{padding:7px 8px;font-size:.82rem;}
 table.pt textarea{min-height:52px;font-size:.82rem;}
-
-/* Multi-image cell */
 .img-cell{display:flex;flex-direction:column;gap:6px;min-width:110px;}
 .img-thumbs{display:flex;flex-wrap:wrap;gap:5px;}
 .img-thumb{width:50px;height:50px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;cursor:pointer;transition:transform .15s;}
@@ -52,7 +50,6 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
 .img-add-btn{display:flex;align-items:center;justify-content:center;gap:4px;background:#eff6ff;border:1.5px dashed #2563eb;border-radius:7px;padding:5px 8px;font-size:.75rem;font-weight:700;color:#2563eb;cursor:pointer;transition:background .2s;white-space:nowrap;}
 .img-add-btn:hover{background:#dbeafe;}
 .img-count{font-size:.7rem;color:#94a3b8;text-align:center;}
-
 .btn{padding:10px 20px;border:none;border-radius:8px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;}
 .btn-primary{background:#2563eb;color:#fff;}
 .btn-primary:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,99,235,.35);}
@@ -60,15 +57,21 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
 .btn-danger:hover{background:#fecaca;}
 .btn-success{background:#16a34a;color:#fff;}
 .btn-success:hover{background:#15803d;transform:translateY(-1px);}
+.btn-sig{background:#7c3aed;color:#fff;}
+.btn-sig:hover{background:#6d28d9;transform:translateY(-1px);}
+.btn-seal{background:#0369a1;color:#fff;}
+.btn-seal:hover{background:#0284c7;transform:translateY(-1px);}
+.btn-both{background:#b45309;color:#fff;}
+.btn-both:hover{background:#92400e;transform:translateY(-1px);}
 .btn-outline{background:#fff;color:#2563eb;border:2px solid #2563eb;}
 .btn-outline:hover{background:#eff6ff;}
 .actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:10px;}
 .total-row td{background:#1a3a6b!important;color:#fff;font-weight:800;font-size:1rem;}
-.ack-box{background:#f8faff;border:1.5px solid #bfdbfe;border-left:4px solid #2563eb;border-radius:0 10px 10px 0;padding:16px 20px;font-size:.9rem;color:#334155;line-height:1.8;}
-.ack-box input{display:inline;width:210px;border:none;border-bottom:2px solid #2563eb;background:transparent;padding:1px 5px;font-size:.92rem;font-weight:700;color:#1a3a6b;}
-.ack-box input:focus{outline:none;}
-
-/* Overlay */
+.footer-imgs-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.footer-img-box{width:90px;height:70px;border-radius:8px;overflow:hidden;border:1.5px solid #e2e8f0;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#94a3b8;text-align:center;flex-direction:column;gap:4px;}
+.footer-img-box img{width:100%;height:100%;object-fit:cover;}
+.footer-locked-note{font-size:.75rem;color:#64748b;margin-top:8px;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:7px 12px;}
+.footer-locked-note strong{color:#b45309;}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;overflow-y:auto;padding:30px 20px;}
 .preview-box{background:#fff;max-width:980px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45);}
 .preview-hdr{background:linear-gradient(135deg,#1a3a6b,#2563eb);color:#fff;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;}
@@ -91,23 +94,24 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
 .prev-table td{padding:8px 10px;border-bottom:1px solid #e2e8f0;vertical-align:top;}
 .prev-table tr:nth-child(even) td{background:#f8faff;}
 .prev-table .sub-row td{background:#1a3a6b;color:#fff;font-weight:800;font-size:.95rem;}
-
-/* Preview multi-image grid */
 .prev-imgs{display:flex;flex-wrap:wrap;gap:5px;}
-.prev-imgs img{width:58px;height:58px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;}
-
-.prev-ack{margin-top:18px;padding:14px 18px;background:#eff6ff;border-left:4px solid #2563eb;border-radius:0 8px 8px 0;font-size:.85rem;color:#334155;line-height:1.7;}
-.prev-ack strong{color:#1a3a6b;}
+.prev-imgs img{width:55px;height:55px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;}
 .prev-notes{margin-top:12px;padding:12px 16px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;font-size:.82rem;color:#78350f;}
-.preview-footer{padding:18px 28px;background:#f8faff;display:flex;gap:12px;flex-wrap:wrap;border-top:1px solid #e2e8f0;}
-
-/* Lightbox */
+.sig-seal-preview{display:flex;gap:30px;align-items:flex-end;margin-top:22px;padding:16px;background:#f8faff;border-radius:10px;border:1px solid #e2e8f0;flex-wrap:wrap;}
+.sig-box-prev{text-align:center;}
+.sig-box-prev img{height:60px;max-width:160px;object-fit:contain;}
+.sig-box-prev p{font-size:.72rem;color:#94a3b8;margin-top:5px;border-top:1px solid #cbd5e1;padding-top:5px;width:160px;}
+.seal-box-prev{text-align:center;}
+.seal-box-prev img{height:85px;width:85px;object-fit:contain;}
+.seal-box-prev p{font-size:.72rem;color:#94a3b8;margin-top:5px;}
+.prev-footer-imgs{margin-top:20px;padding-top:16px;border-top:2px solid #e2e8f0;}
+.prev-footer-imgs-label{font-size:.72rem;color:#94a3b8;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+.preview-footer{padding:18px 28px;background:#f8faff;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid #e2e8f0;}
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;}
 .lightbox.show{display:flex;}
-.lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 10px 60px rgba(0,0,0,.6);}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;}
 .lightbox-close{position:absolute;top:20px;right:28px;color:#fff;font-size:2rem;cursor:pointer;font-weight:700;}
-
-@media(max-width:700px){.grid2,.grid3,.to-from{grid-template-columns:1fr;}.prev-top{flex-direction:column;gap:14px;}}
+@media(max-width:700px){.grid2,.grid3,.to-from{grid-template-columns:1fr;}.prev-top{flex-direction:column;gap:14px;}.actions{flex-direction:column;}}
 </style>
 </head>
 <body>
@@ -134,7 +138,7 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
     <div style="text-align:right;"><div class="label">Date Issued</div><div class="value" id="invDateDisplay">—</div></div>
   </div>
 
-  <!-- Company -->
+  <!-- Company Details -->
   <div class="card">
     <h2>Our Company Details</h2>
     <div class="grid2">
@@ -160,15 +164,15 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
             <img id="logoImg" class="logo-display" src="" alt="Logo" style="display:none;">
           </div>
           <div>
-            <div style="font-weight:700;color:#1a3a6b;font-size:.95rem;" id="logoNameLabel">ETS – UGOKINS EMMASON</div>
-            <p class="logo-locked-note">Logo is <strong>locked</strong>.<br>Only editable from VS Code.</p>
+            <div style="font-weight:700;color:#1a3a6b;" id="logoNameLabel">ETS – UGOKINS EMMASON</div>
+            <p class="logo-locked-note">Logo is <strong>locked</strong>. Only editable from VS Code.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Client -->
+  <!-- Client Details -->
   <div class="card">
     <h2>Client / Recipient Details (TO)</h2>
     <div class="grid3">
@@ -183,7 +187,7 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
   <div class="card">
     <h2>Products / Items</h2>
     <div class="table-wrap">
-      <table class="pt" id="productTable">
+      <table class="pt">
         <thead>
           <tr>
             <th style="width:34px;">#</th>
@@ -212,26 +216,29 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
     </div>
   </div>
 
-  <!-- Acknowledgement -->
+  <!-- Notes -->
   <div class="card">
-    <h2>Engineer Acknowledgement & Notes</h2>
-    <div class="ack-box">
-      I, <input type="text" id="engineerName" placeholder="Engineer's full name">,
-      hereby acknowledge that all the information contained in this proforma invoice is correct, complete,
-      and has been duly verified. This quotation represents the actual products, specifications,
-      quantities, and prices as agreed upon with the client.
-    </div>
-    <div style="margin-top:16px;">
-      <label>Additional Notes (optional)</label>
-      <textarea id="invoiceNotes" placeholder="e.g. Payment terms, delivery timeline, warranty conditions..."></textarea>
-    </div>
+    <h2>Additional Notes (Optional)</h2>
+    <textarea id="invoiceNotes" placeholder="e.g. Payment terms, delivery timeline, warranty conditions, installation notes..."></textarea>
   </div>
 
-  <!-- Actions -->
+  <!-- Footer Images -->
+  <div class="card">
+    <h2>Product Sample Images — Footer <span style="color:#dc2626;font-size:.7rem;font-weight:800;">🔒 LOCKED</span></h2>
+    <p style="font-size:.82rem;color:#64748b;margin-bottom:4px;">These 6 product sample images appear at the footer of every invoice. Only editable from VS Code.</p>
+    <div class="footer-imgs-row" id="footerImgsPreview"></div>
+    <div class="footer-locked-note">⚠️ To update footer images, open in <strong>VS Code</strong> and edit the <strong>FOOTER_IMAGES</strong> array in the script section.</div>
+  </div>
+
+  <!-- Export -->
   <div class="card green">
+    <h2>Preview & Export Invoice</h2>
     <div class="actions">
       <button class="btn btn-primary" onclick="showPreview()">👁️ Preview Invoice</button>
-      <button class="btn btn-success" onclick="exportPDF()">📄 Download PDF</button>
+      <button class="btn btn-success" onclick="doExport('plain')">📄 Export PDF</button>
+      <button class="btn btn-sig" onclick="doExport('sig')">✍️ Export with Signature</button>
+      <button class="btn btn-seal" onclick="doExport('seal')">🔏 Export with Seal</button>
+      <button class="btn btn-both" onclick="doExport('both')">📄✍️ Export with Signature + Seal</button>
     </div>
   </div>
 
@@ -241,7 +248,10 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
 <div class="overlay" id="previewOverlay">
   <div class="preview-box">
     <div class="preview-hdr">
-      <div><div style="font-size:1.05rem;font-weight:800;">📋 Invoice Preview</div><div style="font-size:.78rem;opacity:.75;margin-top:2px;">Review all details before downloading</div></div>
+      <div>
+        <div style="font-size:1.05rem;font-weight:800;">📋 Invoice Preview</div>
+        <div style="font-size:.78rem;opacity:.75;margin-top:2px;">Review all details before exporting</div>
+      </div>
       <button class="btn" style="background:rgba(255,255,255,.18);color:#fff;" onclick="closePreview()">✕ Close & Edit</button>
     </div>
     <div class="preview-body">
@@ -249,7 +259,10 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
       <div class="preview-inner" id="previewInner"></div>
     </div>
     <div class="preview-footer">
-      <button class="btn btn-success" onclick="exportPDF()">📄 Download PDF</button>
+      <button class="btn btn-success" onclick="doExport('plain')">📄 Export PDF</button>
+      <button class="btn btn-sig" onclick="doExport('sig')">✍️ With Signature</button>
+      <button class="btn btn-seal" onclick="doExport('seal')">🔏 With Seal</button>
+      <button class="btn btn-both" onclick="doExport('both')">📄✍️ Signature + Seal</button>
       <button class="btn btn-outline" onclick="closePreview()">✏️ Go Back & Edit</button>
     </div>
   </div>
@@ -262,65 +275,99 @@ table.pt textarea{min-height:52px;font-size:.82rem;}
 </div>
 
 <script>
-/* ╔═══════════════════════════════════════════╗
-   ║  LOCKED — EDIT ONLY FROM VS CODE          ║
-   ╚═══════════════════════════════════════════╝ */
-const COMPANY_NAME = "ETS – UGOKINS EMMASON";
-const COMPANY_LOGO_SRC = "logo 2.png"; // ← paste base64 or relative path e.g. "logo.png"
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  LOCKED CONSTANTS — EDIT ONLY FROM VS CODE                   ║
+   ║  Run embed.py once to convert images to base64 strings       ║
+   ╚══════════════════════════════════════════════════════════════╝ */
 
-/* Apply locked values */
-['lockedNameDisplay','logoNameLabel','topbarName'].forEach(id=>document.getElementById(id).textContent=COMPANY_NAME);
-document.title = COMPANY_NAME+' | Invoice Builder';
+const COMPANY_NAME     = "ETS – UGOKINS EMMASON";
+const COMPANY_LOGO_SRC = "logo.png"; // ← paste base64 string from logo_b64.txt
+
+const SIGNATURE_SRC = "signature.png"; // ← paste base64 string from signature_b64.txt
+
+const SEAL_SRC = "company seal.jpg"; // ← paste base64 string from seal_b64.txt
+
+const FOOTER_IMAGES = [
+  "img 1.png", // ← paste base64 or path for footer image 1
+  "img 2.png", // ← footer image 2
+  "img 3.png", // ← footer image 3
+  "img 4.png", // ← footer image 4
+  "img 5.png", // ← footer image 5
+  "img 6.png", // ← footer image 6
+];
+
+/* ══ Apply locked values ══ */
+['lockedNameDisplay','logoNameLabel','topbarName'].forEach(id =>
+  document.getElementById(id).textContent = COMPANY_NAME
+);
+document.title = COMPANY_NAME + ' | Invoice Builder';
+
 if(COMPANY_LOGO_SRC){
-  const li=document.getElementById('logoImg'); li.src=COMPANY_LOGO_SRC; li.style.display='block';
-  document.getElementById('logoPlaceholder').style.display='none';
-  document.getElementById('topbarLogoWrap').innerHTML=`<img src="${COMPANY_LOGO_SRC}" class="topbar-logo">`;
+  const li = document.getElementById('logoImg');
+  li.src = COMPANY_LOGO_SRC; li.style.display = 'block';
+  document.getElementById('logoPlaceholder').style.display = 'none';
+  document.getElementById('topbarLogoWrap').innerHTML =
+    `<img src="${COMPANY_LOGO_SRC}" class="topbar-logo">`;
 }
 
-/* Invoice number & date */
-function genInvNo(){const n=new Date();return `INV-${String(n.getFullYear()).slice(2)}${String(n.getMonth()+1).padStart(2,'0')}${String(n.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*900)+100}`;}
-const INVOICE_NO=genInvNo();
-const TODAY=new Date();
-const TODAY_STR=TODAY.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
-document.getElementById('invNoDisplay').textContent=INVOICE_NO;
-document.getElementById('invDateDisplay').textContent=TODAY_STR;
-const qv=new Date(); qv.setDate(qv.getDate()+30);
-document.getElementById('quoteValid').value=qv.toISOString().split('T')[0];
+/* ══ Render footer image placeholders ══ */
+const fpWrap = document.getElementById('footerImgsPreview');
+FOOTER_IMAGES.forEach((src, i) => {
+  const box = document.createElement('div');
+  box.className = 'footer-img-box';
+  box.innerHTML = src
+    ? `<img src="${src}" alt="Footer ${i+1}">`
+    : `<span style="font-size:1.4rem;">🖼️</span><span>Image ${i+1}</span>`;
+  fpWrap.appendChild(box);
+});
 
-/* Resize image to 200x200 */
-function resizeImage(file,cb){
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');
-      canvas.width=200; canvas.height=200;
-      const ctx=canvas.getContext('2d');
-      const scale=Math.max(200/img.width,200/img.height);
-      const w=img.width*scale,h=img.height*scale;
-      ctx.fillStyle='#fff'; ctx.fillRect(0,0,200,200);
+/* ══ Invoice number & date ══ */
+function genInvNo(){
+  const n = new Date();
+  return `INV-${String(n.getFullYear()).slice(2)}${String(n.getMonth()+1).padStart(2,'0')}${String(n.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*900)+100}`;
+}
+const INVOICE_NO = genInvNo();
+const TODAY      = new Date();
+const TODAY_STR  = TODAY.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+document.getElementById('invNoDisplay').textContent  = INVOICE_NO;
+document.getElementById('invDateDisplay').textContent = TODAY_STR;
+const qv = new Date(); qv.setDate(qv.getDate()+30);
+document.getElementById('quoteValid').value = qv.toISOString().split('T')[0];
+
+/* ══ Resize image to 200×200 ══ */
+function resizeImage(file, cb){
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = 200; c.height = 200;
+      const ctx = c.getContext('2d');
+      const scale = Math.max(200/img.width, 200/img.height);
+      const w = img.width*scale, h = img.height*scale;
+      ctx.fillStyle = '#fff'; ctx.fillRect(0,0,200,200);
       ctx.drawImage(img,(200-w)/2,(200-h)/2,w,h);
-      cb(canvas.toDataURL('image/jpeg',0.85));
+      cb(c.toDataURL('image/jpeg',.85));
     };
-    img.src=e.target.result;
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-/* Image store: rowId → array of base64 strings */
-const imgStore={};
-let rowCount=0;
+/* ══ Product rows ══ */
+let rowCount = 0;
+const imgStore = {};
 
 function addRow(){
   rowCount++;
-  const id=rowCount;
-  imgStore[id]=[];
-  const tr=document.createElement('tr');
-  tr.id=`row-${id}`;
-  tr.innerHTML=`
+  const id = rowCount;
+  imgStore[id] = [];
+  const tr = document.createElement('tr');
+  tr.id = `row-${id}`;
+  tr.innerHTML = `
     <td style="font-weight:800;color:#2563eb;text-align:center;vertical-align:middle;">${id}</td>
     <td>
-      <div class="img-cell" id="imgCell-${id}">
+      <div class="img-cell">
         <div class="img-thumbs" id="imgThumbs-${id}"></div>
         <div class="img-add-btn" onclick="document.getElementById('imgFile-${id}').click()">📷 Add Image</div>
         <div class="img-count" id="imgCount-${id}">0 image(s)</div>
@@ -343,38 +390,40 @@ function addRow(){
   calcSubtotal();
 }
 
-function loadImgs(id,input){
+function loadImgs(id, input){
   if(!input.files||!input.files.length) return;
-  Array.from(input.files).forEach(file=>{
-    resizeImage(file,b64=>{
+  Array.from(input.files).forEach(f => {
+    resizeImage(f, b64 => {
       imgStore[id].push(b64);
       renderThumbs(id);
     });
   });
-  input.value=''; // allow re-uploading same file
+  input.value = '';
 }
 
 function renderThumbs(id){
-  const wrap=document.getElementById(`imgThumbs-${id}`);
-  const count=document.getElementById(`imgCount-${id}`);
-  wrap.innerHTML=imgStore[id].map((b64,i)=>
-    `<img src="${b64}" class="img-thumb" title="Click to view | Right-click to remove"
-      onclick="openLightbox('${b64}')"
-      oncontextmenu="removeImg(event,${id},${i})">`
-  ).join('');
-  count.textContent=`${imgStore[id].length} image(s) — right-click thumb to remove`;
+  document.getElementById(`imgThumbs-${id}`).innerHTML =
+    imgStore[id].map((b64,i) =>
+      `<img src="${b64}" class="img-thumb"
+        onclick="openLightbox('${b64}')"
+        oncontextmenu="removeImg(event,${id},${i})"
+        title="Click to view | Right-click to remove">`
+    ).join('');
+  document.getElementById(`imgCount-${id}`).textContent =
+    `${imgStore[id].length} image(s) — right-click to remove`;
 }
 
-function removeImg(e,rowId,imgIdx){
+function removeImg(e, rowId, idx){
   e.preventDefault();
-  imgStore[rowId].splice(imgIdx,1);
+  imgStore[rowId].splice(idx,1);
   renderThumbs(rowId);
 }
 
 function calcRow(id){
-  const qty=parseFloat(document.getElementById(`qty-${id}`)?.value)||0;
-  const price=parseFloat(document.getElementById(`price-${id}`)?.value)||0;
-  document.getElementById(`total-${id}`).textContent='$'+(qty*price).toLocaleString('en-US',{minimumFractionDigits:2});
+  const qty   = parseFloat(document.getElementById(`qty-${id}`)?.value)||0;
+  const price = parseFloat(document.getElementById(`price-${id}`)?.value)||0;
+  document.getElementById(`total-${id}`).textContent =
+    '$'+(qty*price).toLocaleString('en-US',{minimumFractionDigits:2});
   calcSubtotal();
 }
 
@@ -385,81 +434,104 @@ function removeRow(id){
 }
 
 function calcSubtotal(){
-  let t=0;
-  document.querySelectorAll('#productBody tr').forEach(tr=>{
-    const id=tr.id.replace('row-','');
-    t+=(parseFloat(document.getElementById(`qty-${id}`)?.value)||0)*(parseFloat(document.getElementById(`price-${id}`)?.value)||0);
+  let t = 0;
+  document.querySelectorAll('#productBody tr').forEach(tr => {
+    const id = tr.id.replace('row-','');
+    t += (parseFloat(document.getElementById(`qty-${id}`)?.value)||0)*
+         (parseFloat(document.getElementById(`price-${id}`)?.value)||0);
   });
-  document.getElementById('grandTotal').textContent='$'+t.toLocaleString('en-US',{minimumFractionDigits:2});
+  document.getElementById('grandTotal').textContent =
+    '$'+t.toLocaleString('en-US',{minimumFractionDigits:2});
   return t;
 }
 
 addRow();
 
-/* Lightbox */
-function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('show');}
-function closeLightbox(){document.getElementById('lightbox').classList.remove('show');}
+/* ══ Lightbox ══ */
+function openLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('show');
+}
 
-/* Gather data */
+/* ══ Gather all form data ══ */
 function gatherData(){
-  const rows=[];
-  document.querySelectorAll('#productBody tr').forEach((tr,i)=>{
-    const id=tr.id.replace('row-','');
-    const qty=parseFloat(document.getElementById(`qty-${id}`)?.value)||0;
-    const price=parseFloat(document.getElementById(`price-${id}`)?.value)||0;
+  const rows = [];
+  document.querySelectorAll('#productBody tr').forEach((tr,i) => {
+    const id    = tr.id.replace('row-','');
+    const qty   = parseFloat(document.getElementById(`qty-${id}`)?.value)||0;
+    const price = parseFloat(document.getElementById(`price-${id}`)?.value)||0;
     rows.push({
-      no:i+1,
-      desc:document.getElementById(`desc-${id}`)?.value||'',
-      size:document.getElementById(`size-${id}`)?.value||'',
-      unit:document.getElementById(`unit-${id}`)?.value||'SET',
-      qty,price,total:qty*price,
-      imgs:imgStore[id]||[]
+      no: i+1,
+      desc:  document.getElementById(`desc-${id}`)?.value||'',
+      size:  document.getElementById(`size-${id}`)?.value||'',
+      unit:  document.getElementById(`unit-${id}`)?.value||'SET',
+      qty, price, total: qty*price,
+      imgs:  imgStore[id]||[]
     });
   });
   return {
-    invoiceNo:INVOICE_NO, date:TODAY_STR,
-    quoteValid:document.getElementById('quoteValid').value,
-    company:{name:COMPANY_NAME,logo:COMPANY_LOGO_SRC,
-      phone:document.getElementById('companyPhone').value,
-      email:document.getElementById('companyEmail').value,
-      address:document.getElementById('companyAddress').value},
-    client:{name:document.getElementById('clientName').value,
-      phone:document.getElementById('clientPhone').value,
-      email:document.getElementById('clientEmail').value,
-      address:document.getElementById('clientAddress').value},
-    engineer:document.getElementById('engineerName').value,
-    notes:document.getElementById('invoiceNotes').value,
-    rows, subtotal:calcSubtotal()
+    invoiceNo:  INVOICE_NO,
+    date:       TODAY_STR,
+    quoteValid: document.getElementById('quoteValid').value,
+    company:{
+      name:    COMPANY_NAME,
+      logo:    COMPANY_LOGO_SRC,
+      phone:   document.getElementById('companyPhone').value,
+      email:   document.getElementById('companyEmail').value,
+      address: document.getElementById('companyAddress').value
+    },
+    client:{
+      name:    document.getElementById('clientName').value,
+      phone:   document.getElementById('clientPhone').value,
+      email:   document.getElementById('clientEmail').value,
+      address: document.getElementById('clientAddress').value
+    },
+    notes:    document.getElementById('invoiceNotes').value,
+    rows,
+    subtotal: calcSubtotal()
   };
 }
 
-/* Preview */
+/* ══ PREVIEW ══ */
 function showPreview(){
-  const d=gatherData();
-  const wm=document.getElementById('previewWatermark');
-  wm.innerHTML=d.company.logo?`<img src="${d.company.logo}">`:`<div class="watermark-text">${d.company.name}</div>`;
+  const d = gatherData();
 
-  const logoHTML=d.company.logo
-    ?`<img src="${d.company.logo}" style="height:65px;max-width:150px;object-fit:contain;border-radius:8px;">`
-    :`<div style="width:60px;height:55px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">⚙️</div>`;
+  document.getElementById('previewWatermark').innerHTML = d.company.logo
+    ? `<img src="${d.company.logo}">`
+    : `<div class="watermark-text">${d.company.name}</div>`;
 
-  const rowsHTML=d.rows.map(r=>{
-    const imgsHTML=r.imgs.length
-      ?`<div class="prev-imgs">${r.imgs.map(b=>`<img src="${b}" onclick="openLightbox('${b}')" style="cursor:pointer;" title="Click to enlarge">`).join('')}</div>`
-      :`<span style="color:#cbd5e1;font-size:1.1rem;">📷</span>`;
-    return `<tr>
+  const logoHTML = d.company.logo
+    ? `<img src="${d.company.logo}" style="height:65px;max-width:150px;object-fit:contain;border-radius:8px;">`
+    : `<div style="width:60px;height:55px;background:#dbeafe;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">⚙️</div>`;
+
+  const rowsHTML = d.rows.map(r => `
+    <tr>
       <td style="text-align:center;font-weight:800;color:#2563eb;">${r.no}</td>
-      <td>${imgsHTML}</td>
+      <td>${r.imgs.length
+        ? `<div class="prev-imgs">${r.imgs.map(b=>`<img src="${b}" onclick="openLightbox('${b}')" style="cursor:pointer;">`).join('')}</div>`
+        : '<span style="color:#cbd5e1;">📷</span>'}</td>
       <td>${r.desc.replace(/\n/g,'<br>')}</td>
       <td>${r.size}</td>
       <td style="text-align:center;">${r.unit}</td>
       <td style="text-align:center;">${r.qty}</td>
       <td style="text-align:right;">$${r.price.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
       <td style="font-weight:800;text-align:right;">$${r.total.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
-    </tr>`;
-  }).join('');
+    </tr>`).join('');
 
-  document.getElementById('previewInner').innerHTML=`
+  const footerHTML = FOOTER_IMAGES.map((src,i) => src
+    ? `<img src="${src}" style="width:80px;height:65px;object-fit:cover;border-radius:7px;border:1px solid #e2e8f0;">`
+    : `<div style="width:80px;height:65px;background:#f1f5f9;border-radius:7px;border:1.5px dashed #cbd5e1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;font-size:.65rem;color:#94a3b8;text-align:center;">🖼️<br>Image ${i+1}</div>`
+  ).join('');
+
+  const sigHTML  = SIGNATURE_SRC
+    ? `<div class="sig-box-prev"><img src="${SIGNATURE_SRC}" alt="Signature"><p>Authorized Signature</p></div>` : '';
+  const sealHTML = SEAL_SRC
+    ? `<div class="seal-box-prev"><img src="${SEAL_SRC}" alt="Company Seal"><p>Company Seal</p></div>` : '';
+
+  document.getElementById('previewInner').innerHTML = `
     <div class="prev-top">
       <div class="prev-company" style="display:flex;align-items:flex-start;gap:14px;">
         ${logoHTML}
@@ -485,110 +557,119 @@ function showPreview(){
       </div>
     </div>
     <table class="prev-table">
-      <thead><tr><th>#</th><th>Images</th><th>Product Description</th><th>Size/Code</th><th>Unit</th><th>Qty</th><th>Unit Price</th><th>Sub Total</th></tr></thead>
+      <thead>
+        <tr><th>#</th><th>Images</th><th>Product Description</th><th>Size/Code</th><th>Unit</th><th>Qty</th><th>Unit Price</th><th>Sub Total</th></tr>
+      </thead>
       <tbody>${rowsHTML}</tbody>
-      <tfoot><tr class="sub-row">
-        <td colspan="7" style="text-align:right;padding:11px 10px;letter-spacing:.5px;">GRAND TOTAL</td>
-        <td style="padding:11px 10px;font-size:1rem;text-align:right;">$${d.subtotal.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
-      </tr></tfoot>
+      <tfoot>
+        <tr class="sub-row">
+          <td colspan="7" style="text-align:right;padding:11px 10px;letter-spacing:.5px;">GRAND TOTAL</td>
+          <td style="padding:11px 10px;font-size:1rem;text-align:right;">$${d.subtotal.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+        </tr>
+      </tfoot>
     </table>
-    ${d.notes?`<div class="prev-notes"><strong>📝 Notes:</strong> ${d.notes}</div>`:''}
-    <div class="prev-ack">I, <strong>${d.engineer||'_______________'}</strong>, hereby acknowledge that all the information contained in this proforma invoice is correct, complete, and has been duly verified. This quotation represents the actual products, specifications, quantities, and prices as agreed upon with the client.</div>
+    ${d.notes ? `<div class="prev-notes"><strong>📝 Notes:</strong> ${d.notes}</div>` : ''}
+    ${sigHTML||sealHTML ? `<div class="sig-seal-preview">${sigHTML}${sealHTML}</div>` : ''}
+    <div class="prev-footer-imgs">
+      <div class="prev-footer-imgs-label">Our Products</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">${footerHTML}</div>
+    </div>
   `;
-  document.getElementById('previewOverlay').style.display='block';
-  document.body.style.overflow='hidden';
+
+  document.getElementById('previewOverlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
 }
 
 function closePreview(){
-  document.getElementById('previewOverlay').style.display='none';
-  document.body.style.overflow='';
+  document.getElementById('previewOverlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
-/* PDF Export */
-async function exportPDF(){
-  const d=gatherData();
-  const {jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-  const pw=doc.internal.pageSize.getWidth();
-  const ph=doc.internal.pageSize.getHeight();
+/* ══ PDF EXPORT ══ */
+async function doExport(mode){
+  const d = gatherData();
+  const {jsPDF} = window.jspdf;
+  const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const pw = doc.internal.pageSize.getWidth();
+  const ph = doc.internal.pageSize.getHeight();
 
   /* Watermark */
   if(d.company.logo){
-    try{doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:.06}));doc.addImage(d.company.logo,'JPEG',pw/2-45,ph/2-45,90,90);doc.restoreGraphicsState();}catch(e){}
+    try{
+      doc.saveGraphicsState();
+      doc.setGState(new doc.GState({opacity:.06}));
+      doc.addImage(d.company.logo,'JPEG',pw/2-45,ph/2-45,90,90);
+      doc.restoreGraphicsState();
+    }catch(e){}
   } else {
-    doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:.05}));
+    doc.saveGraphicsState();
+    doc.setGState(new doc.GState({opacity:.05}));
     doc.setTextColor(37,99,235);doc.setFontSize(32);doc.setFont('helvetica','bold');
-    doc.text(d.company.name,pw/2,ph/2,{align:'center',angle:20});doc.restoreGraphicsState();
+    doc.text(d.company.name,pw/2,ph/2,{align:'center',angle:20});
+    doc.restoreGraphicsState();
   }
 
   /* Header */
   doc.setFillColor(26,58,107); doc.rect(0,0,pw,40,'F');
-  const txtX=d.company.logo?44:14;
+  const txtX = d.company.logo ? 44 : 14;
   if(d.company.logo){try{doc.addImage(d.company.logo,'JPEG',12,5,26,26);}catch(e){}}
   doc.setTextColor(255,255,255);doc.setFontSize(14);doc.setFont('helvetica','bold');
-  doc.text(d.company.name,txtX,13);
+  doc.text(d.company.name, txtX, 13);
   doc.setFontSize(7.5);doc.setFont('helvetica','normal');
-  doc.text(`Tel: ${d.company.phone}`,txtX,19);
-  doc.text(`Email: ${d.company.email}`,txtX,24);
-  doc.text(`Address: ${d.company.address}`,txtX,29);
+  doc.text(`Tel: ${d.company.phone}`, txtX, 19);
+  doc.text(`Email: ${d.company.email}`, txtX, 24);
+  doc.text(`Address: ${d.company.address}`, txtX, 29);
   doc.setFontSize(8);doc.setFont('helvetica','bold');
-  doc.text(d.invoiceNo,pw-12,12,{align:'right'});
+  doc.text(d.invoiceNo, pw-12, 12, {align:'right'});
   doc.setFont('helvetica','normal');doc.setFontSize(7.5);
-  doc.text(`Date: ${d.date}`,pw-12,18,{align:'right'});
-  doc.text(`Quote Valid: ${d.quoteValid}`,pw-12,23,{align:'right'});
+  doc.text(`Date: ${d.date}`, pw-12, 18, {align:'right'});
+  doc.text(`Quote Valid: ${d.quoteValid}`, pw-12, 23, {align:'right'});
 
   /* Title bar */
-  doc.setFillColor(37,99,235);doc.rect(0,40,pw,9,'F');
+  doc.setFillColor(37,99,235); doc.rect(0,40,pw,9,'F');
   doc.setTextColor(255,255,255);doc.setFontSize(10);doc.setFont('helvetica','bold');
-  doc.text('PROFORMA INVOICE',pw/2,46.5,{align:'center'});
+  doc.text('PROFORMA INVOICE', pw/2, 46.5, {align:'center'});
 
-  let y=56;
+  let y = 56;
 
-  /* TO/FROM */
-  doc.setFillColor(248,250,255);doc.roundedRect(12,y,pw-24,28,3,3,'F');
-  doc.setDrawColor(226,232,240);doc.roundedRect(12,y,pw-24,28,3,3,'S');
+  /* TO / FROM */
+  doc.setFillColor(248,250,255); doc.roundedRect(12,y,pw-24,28,3,3,'F');
+  doc.setDrawColor(226,232,240); doc.roundedRect(12,y,pw-24,28,3,3,'S');
   doc.setFontSize(7);doc.setFont('helvetica','bold');doc.setTextColor(37,99,235);
-  doc.text('TO (CLIENT / RECIPIENT)',16,y+5);doc.text('FROM (SUPPLIER)',pw/2+2,y+5);
+  doc.text('TO (CLIENT / RECIPIENT)', 16, y+5);
+  doc.text('FROM (SUPPLIER)', pw/2+2, y+5);
   doc.setFont('helvetica','bold');doc.setTextColor(26,58,107);doc.setFontSize(8.5);
-  doc.text(d.client.name||'—',16,y+11);doc.text(d.company.name,pw/2+2,y+11);
+  doc.text(d.client.name||'—', 16, y+11);
+  doc.text(d.company.name, pw/2+2, y+11);
   doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);doc.setFontSize(7.5);
-  doc.text(`Tel: ${d.client.phone||'—'}`,16,y+16);
-  doc.text(`Email: ${d.client.email||'—'}`,16,y+21);
-  doc.text(`Address: ${d.client.address||'—'}`,16,y+26,{maxWidth:pw/2-20});
-  doc.text(`Tel: ${d.company.phone}`,pw/2+2,y+16);
-  doc.text(`Email: ${d.company.email}`,pw/2+2,y+21);
-  doc.text(`Address: ${d.company.address}`,pw/2+2,y+26,{maxWidth:pw/2-16});
-  y+=34;
+  doc.text(`Tel: ${d.client.phone||'—'}`, 16, y+16);
+  doc.text(`Email: ${d.client.email||'—'}`, 16, y+21);
+  doc.text(`Address: ${d.client.address||'—'}`, 16, y+26,{maxWidth:pw/2-20});
+  doc.text(`Tel: ${d.company.phone}`, pw/2+2, y+16);
+  doc.text(`Email: ${d.company.email}`, pw/2+2, y+21);
+  doc.text(`Address: ${d.company.address}`, pw/2+2, y+26,{maxWidth:pw/2-16});
+  y += 34;
 
-  /* Products table with multiple images per row */
-  const IMG_CELL_SIZE=18; // mm each image in PDF
-  const IMG_GAP=2;
-
-  const tableBody=d.rows.map(r=>[
-    r.no,
-    '', // images drawn via didDrawCell
-    r.desc,
-    r.size,
-    r.unit,
-    r.qty,
+  /* Products table */
+  const IMG_SZ = 17, IMG_GAP = 2;
+  const tableBody = d.rows.map(r => [
+    r.no, '', r.desc, r.size, r.unit, r.qty,
     '$'+r.price.toLocaleString('en-US',{minimumFractionDigits:2}),
     '$'+r.total.toLocaleString('en-US',{minimumFractionDigits:2})
   ]);
-  tableBody.push(['','','','','','','GRAND TOTAL','$'+d.subtotal.toLocaleString('en-US',{minimumFractionDigits:2})]);
+  tableBody.push(['','','','','','','GRAND TOTAL',
+    '$'+d.subtotal.toLocaleString('en-US',{minimumFractionDigits:2})]);
 
-  // Calculate row heights based on image count
-  const rowHeights=d.rows.map(r=>{
-    const n=r.imgs.length||0;
-    if(n===0) return 18;
-    const cols=Math.min(n,3);
-    const rowsNeeded=Math.ceil(n/cols);
-    return Math.max(18, rowsNeeded*(IMG_CELL_SIZE+IMG_GAP)+4);
+  const rowHeights = d.rows.map(r => {
+    const n = r.imgs.length||0;
+    if(!n) return 18;
+    return Math.max(18, Math.ceil(n/3)*(IMG_SZ+IMG_GAP)+4);
   });
 
   doc.autoTable({
-    startY:y,
+    startY: y,
     head:[['#','Images','Product Description','Size/Code','Unit','Qty','Unit Price','Sub Total']],
-    body:tableBody,
+    body: tableBody,
     theme:'grid',
     headStyles:{fillColor:[26,58,107],textColor:255,fontStyle:'bold',fontSize:8,cellPadding:3},
     bodyStyles:{fontSize:7.5,textColor:[30,30,30],cellPadding:2},
@@ -605,10 +686,9 @@ async function exportPDF(){
     },
     didParseCell:(data)=>{
       if(data.section==='body'){
-        if(data.row.index<d.rows.length){
-          data.cell.styles.minCellHeight=rowHeights[data.row.index];
-        }
-        if(data.row.index===tableBody.length-1){
+        if(data.row.index < d.rows.length)
+          data.cell.styles.minCellHeight = rowHeights[data.row.index];
+        if(data.row.index === tableBody.length-1){
           data.cell.styles.fillColor=[26,58,107];
           data.cell.styles.textColor=[255,255,255];
           data.cell.styles.fontStyle='bold';
@@ -617,51 +697,92 @@ async function exportPDF(){
       }
     },
     didDrawCell:(data)=>{
-      if(data.section==='body' && data.column.index===1 && data.row.index<d.rows.length){
-        const imgs=d.rows[data.row.index].imgs;
+      if(data.section==='body' && data.column.index===1 && data.row.index < d.rows.length){
+        const imgs = d.rows[data.row.index].imgs;
         if(!imgs||!imgs.length) return;
-        const cx=data.cell.x+2;
-        const cy=data.cell.y+2;
-        const maxCols=3;
         imgs.forEach((b64,i)=>{
           try{
-            const col=i%maxCols;
-            const row=Math.floor(i/maxCols);
-            const x=cx+col*(IMG_CELL_SIZE+IMG_GAP);
-            const yy=cy+row*(IMG_CELL_SIZE+IMG_GAP);
-            doc.addImage(b64,'JPEG',x,yy,IMG_CELL_SIZE,IMG_CELL_SIZE);
+            const col=i%3, row=Math.floor(i/3);
+            doc.addImage(b64,'JPEG',
+              data.cell.x+2+col*(IMG_SZ+IMG_GAP),
+              data.cell.y+2+row*(IMG_SZ+IMG_GAP),
+              IMG_SZ, IMG_SZ);
           }catch(e){}
         });
       }
     }
   });
 
-  y=doc.lastAutoTable.finalY+8;
+  y = doc.lastAutoTable.finalY + 8;
 
   /* Notes */
   if(d.notes){
-    if(y+16>ph-20){doc.addPage();y=15;}
+    if(y+18>ph-55){doc.addPage();y=15;}
     doc.setFillColor(255,251,235);doc.roundedRect(12,y,pw-24,14,2,2,'F');
     doc.setDrawColor(252,211,77);doc.roundedRect(12,y,pw-24,14,2,2,'S');
     doc.setFontSize(7.5);doc.setFont('helvetica','bold');doc.setTextColor(120,53,15);
-    doc.text('Notes:',15,y+5);doc.setFont('helvetica','normal');
+    doc.text('Notes:',15,y+5);
+    doc.setFont('helvetica','normal');
     doc.text(d.notes,28,y+5,{maxWidth:pw-44});
-    y+=18;
+    y += 18;
   }
 
-  /* Acknowledgement */
-  if(y+24>ph-15){doc.addPage();y=15;}
-  doc.setFillColor(239,246,255);doc.roundedRect(12,y,pw-24,22,2,2,'F');
-  doc.setFillColor(37,99,235);doc.rect(12,y,3,22,'F');
-  doc.setFontSize(7.5);doc.setFont('helvetica','normal');doc.setTextColor(51,65,85);
-  const ack=`I, ${d.engineer||'_______________'}, hereby acknowledge that all the information contained in this proforma invoice is correct, complete, and has been duly verified. This quotation represents the actual products, specifications, quantities, and prices as agreed upon with the client.`;
-  doc.text(ack,18,y+7,{maxWidth:pw-34});
+  /* Signature / Seal */
+  const showSig  = (mode==='sig'  || mode==='both');
+  const showSeal = (mode==='seal' || mode==='both');
 
-  /* Footer */
-  doc.setFontSize(7);doc.setTextColor(148,163,184);doc.setFont('helvetica','italic');
-  doc.text(`${d.company.name} | ${d.invoiceNo} | Generated ${d.date}`,pw/2,ph-8,{align:'center'});
+  if(showSig || showSeal){
+    if(y+40>ph-40){doc.addPage();y=15;}
+    if(showSig && showSeal){
+      // Signature left, seal right
+      try{doc.addImage(SIGNATURE_SRC,'PNG',14,y,55,24);}catch(e){}
+      doc.setDrawColor(180,180,180);doc.line(14,y+27,69,y+27);
+      doc.setFontSize(7);doc.setTextColor(120,120,120);doc.setFont('helvetica','normal');
+      doc.text('Authorized Signature',14,y+32);
+      try{doc.addImage(SEAL_SRC,'JPEG',pw-58,y-4,42,42);}catch(e){}
+      doc.text('Company Seal',pw-58,y+32);
+    } else if(showSig){
+      try{doc.addImage(SIGNATURE_SRC,'PNG',14,y,55,24);}catch(e){}
+      doc.setDrawColor(180,180,180);doc.line(14,y+27,69,y+27);
+      doc.setFontSize(7);doc.setTextColor(120,120,120);doc.setFont('helvetica','normal');
+      doc.text('Authorized Signature',14,y+32);
+    } else if(showSeal){
+      try{doc.addImage(SEAL_SRC,'JPEG',pw/2-21,y-4,42,42);}catch(e){}
+      doc.setFontSize(7);doc.setTextColor(120,120,120);doc.setFont('helvetica','normal');
+      doc.text('Company Seal',pw/2-21,y+32);
+    }
+    y += 40;
+  }
 
-  doc.save(`${d.invoiceNo}.pdf`);
+  /* Footer product images */
+  const validFooter = FOOTER_IMAGES.filter(s=>s&&s.length>0);
+  if(validFooter.length > 0){
+    if(y+28>ph-15){doc.addPage();y=15;}
+    doc.setDrawColor(226,232,240);doc.line(12,y,pw-12,y);
+    y += 5;
+    doc.setFontSize(7);doc.setTextColor(150,150,150);doc.setFont('helvetica','bold');
+    doc.text('OUR PRODUCTS',12,y+4);
+    y += 8;
+    const imgW = (pw-28)/6 - 2;
+    FOOTER_IMAGES.forEach((src,i)=>{
+      if(!src) return;
+      try{
+        doc.addImage(src,'JPEG',12+i*(imgW+2),y,imgW,imgW*0.75);
+      }catch(e){}
+    });
+    y += imgW*0.75 + 4;
+  }
+
+  /* Page footer line */
+  doc.setFontSize(7);doc.setTextColor(180,180,180);doc.setFont('helvetica','italic');
+  doc.text(
+    `${d.company.name}  |  ${d.invoiceNo}  |  Generated ${d.date}`,
+    pw/2, ph-8, {align:'center'}
+  );
+
+  /* Save with descriptive filename */
+  const suffix = mode==='plain'?'' : mode==='sig'?'_Signed' : mode==='seal'?'_Sealed':'_Signed_Sealed';
+  doc.save(`${d.invoiceNo}${suffix}.pdf`);
 }
 </script>
 </body>
