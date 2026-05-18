@@ -508,10 +508,10 @@ table.pt textarea{min-height:48px;font-size:.8rem;}
    ║  LOCKED CONSTANTS — EDIT FROM VS CODE ONLY   ║
    ╚══════════════════════════════════════════════╝ */
 const COMPANY_NAME='ETS – UGOKINS EMMASON';
-const COMPANY_LOGO_SRC='';
-const SIGNATURE_SRC='';
-const SEAL_SRC='';
-const FOOTER_IMAGES=['','','','','','','',''];
+const COMPANY_LOGO_SRC='logo.png'; // Relative path to company logo image (e.g. 'logo.png'), or leave empty for no logo
+const SIGNATURE_SRC='signature.png'; // Relative path to signature image (e.g. 'signature.png'), or leave empty for no signature
+const SEAL_SRC='company seal.jpg'; // Relative path to seal image (e.g. 'company seal.jpg'), or leave empty for no seal
+const FOOTER_IMAGES=['img 1.png','img 2.png','img 3.png','img 4.png','img 5.png','img 6.png','img 7.png','img 8.png']; // Relative paths to footer images (e.g. 'img 1.png'), or leave empty for no image
 
 /* ══ Init ══ */
 ['lockedNameDisplay','logoNameLabel','topbarName'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=COMPANY_NAME;});
@@ -1203,3 +1203,4 @@ function exportFullHistPDF(idx,mode){
 </script>
 </body>
 </html>
+        
